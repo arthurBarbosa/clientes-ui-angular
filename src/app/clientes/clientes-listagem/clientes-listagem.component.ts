@@ -30,7 +30,7 @@ export class ClientesListagemComponent implements OnInit {
   }
 
   novoCadastro(){
-    this.router.navigate(['clientes-form']);
+    this.router.navigate(['clientes/form']);
   }
   
   prepareDelecao(cliente:Cliente){
