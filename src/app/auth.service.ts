@@ -25,14 +25,14 @@ export class AuthService {
 
   tentarLogar(username: string, password: string): Observable<any> {
     const params = new HttpParams()
-              .set('username', username)
-              .set('password', password)
-              .set('grant_type', 'password')
+      .set('username', username)
+      .set('password', password)
+      .set('grant_type', 'password')
 
     const headers = {
-      'Content-Type' : 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/x-www-form-urlencoded',
       'Authorization': 'Basic ' + btoa(`${this.clientId}:${this.clientSecret}`),
-      
+
     }
 
     return this.http.post<any>(this.tokenUrl, params.toString(), { headers })

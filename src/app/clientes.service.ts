@@ -8,8 +8,9 @@ import { environment } from '../environments/environment'
   providedIn: 'root'
 })
 export class ClientesService {
- apiURL = environment.apiURLBase + '/api/clientes';
-  
+
+  apiURL = environment.apiURLBase + '/api/clientes';
+
   constructor(private http: HttpClient) { }
 
   salvar(cliente: Cliente): Observable<Cliente> {
@@ -17,7 +18,12 @@ export class ClientesService {
   }
 
   getClientes(): Observable<Cliente[]> {
-    return this.http.get<Cliente[]>(`${this.apiURL}`);
+    const tokenString = localStorage.getItem('access_token');
+    const token = JSON.parse(tokenString);
+    const headers = {
+      'Authorization': 'Bearer ' + token.access_token
+    }
+    return this.http.get<Cliente[]>(this.apiURL, { headers });
   }
 
   getCliente(id: number): Observable<Cliente> {
