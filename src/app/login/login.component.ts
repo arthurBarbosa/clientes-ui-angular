@@ -25,7 +25,14 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    // this.router.navigate(['home']);
+    this.authService
+    .tentarLogar(this.username, this.password)
+    .subscribe(response => {
+      console.log("Aquiiiiiiiiiiiiiiiii ", response)
+      this.router.navigate(['home']);
+    }, errorResponse => {
+      this.errors = ['Usuário e/ou senha incorreto(s).']
+    })
   }
 
   preparaCadastro(event) {
