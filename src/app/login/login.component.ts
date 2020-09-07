@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.router.navigate(['home']);
+    // this.router.navigate(['home']);
   }
 
   preparaCadastro(event) {
@@ -38,15 +38,16 @@ export class LoginComponent implements OnInit {
   }
 
   cadastrar() {
-
-    const usuario: Usuario = new Usuario();
+    let usuario: Usuario = new Usuario();
     usuario.username = this.username;
     usuario.password = this.password;
 
     this.authService.salvar(usuario)
       .subscribe(response => {
-        this.mensagemSucesso = "Cadastro realizado com sucesso!"
-
+        this.mensagemSucesso = "Cadastro realizado com sucesso!";
+        this.cadastrando = false;
+        this.username = '';
+        this.password = '';
       }, errorResponse => {
         this.mensagemSucesso = null;
         this.errors = errorResponse.error.errors
